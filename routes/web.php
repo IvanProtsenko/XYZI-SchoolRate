@@ -19,3 +19,8 @@ Route::get('/', function () {
 Route::get('/main', 'MainPageController@ShowList');
 Route::get('/profile{id}', 'ProfileController@ShowProfile');
 Route::get('/profile{id}/add_rewiew', 'ProfileController@AddReview');
+Route::get('/teachers', 'MainPageController@AddReview');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
