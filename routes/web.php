@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/main', 'MainPageController@ShowList');
+Route::get('/profile{id}', 'ProfileController@ShowProfile');
+Route::get('/profile{id}/add_rewiew', 'ProfileController@AddReview');

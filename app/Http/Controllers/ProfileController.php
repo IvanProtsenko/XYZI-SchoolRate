@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function ShowProfile() {
-        $teachers = User::where('status', 'teacher')->sortBy('name');
+    public function ShowProfile($id) {
+        $teachers = User::where('id', $id)->sortBy('name');
         return view('/teachers/teacher_view', ['teachers' => $teachers]);
     }
     public function AddReview(Request $request) {
