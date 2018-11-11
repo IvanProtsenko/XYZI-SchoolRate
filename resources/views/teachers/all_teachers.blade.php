@@ -35,7 +35,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title">Теги:</h2>
+                    <h2 class="card-title">Сортировка по:</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST">
