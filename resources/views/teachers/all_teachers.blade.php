@@ -1,27 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <br>
-    <div class="row" style = "margin-top: -30px">
-        <div class="col" style="margin: -10px">
-            <div class="float-left">
-                <h2 class="nav-link" style="color: blue">События</h2>
-            </div>
-            <div class="text-center" style="margin-right: 10px">
-                <a class="nav-link" href="{{url('/insider/events/old')}}" style="color:black"><h2>Архив событий</h2></a>
-            </div>
-            <div class="float-right" style="margin-top: -50px;">
-                <a href="{{url('/insider/events/add_event')}}" class = "btn btn-success">Провести событие</a>
-            </div>
-        </div>
-    </div>
+    
     <div class="row" style = "margin-top: 10px">
         <div class="col-md-8">
                             <div class="card-group">
                                 <div class="card" style="border: 1px solid grey">
                                     <div class="card-footer">
-                                        <div class="text-center" style="margin-bottom: -33px">
-                                            <h4><b>{{"Name"}}, ({{"Stage"}})</b></h4>
+                                        <div class="float-left" style="margin-bottom: -33px">
+                                            <h4><b>{{"Name"}}</b></h4>
                                         </div>
                                         <div class="float-right" style="margin-right:15px">
                                             <b>{{"Subject"}}</b>
@@ -30,8 +17,14 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="card-body">
-                                                {{"SMTH"}}
+                                                <div class="float-left">
+                                                    {{"image"}}
+                                                </div>
+                                                <div class="text-center" style="margin-bottom: -33px">
+                                                    {{"stage, age"}}
+                                                </div>
                                                 <div class="float-right">
+                                                    {{"rating"}}
                                                 </div>
                                             </div>
                                         </div>
