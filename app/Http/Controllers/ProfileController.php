@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class ProfileController extends Controller
 {
     public function ShowProfile($id) {
-        $teachers = User::where('id', $id)->sortBy('name');
+        $teachers = User::where('id', 1);
         return view('/teachers/teacher_view', ['teachers' => $teachers]);
     }
     public function AddReview(Request $request) {
@@ -15,7 +16,6 @@ class ProfileController extends Controller
         $review->id_send = $request->id_send;
         $review->id_get = $request->id_get;
         $review->text = $request->text;
-        $review->rating = $request->rating;
         $review->status = "waiting";
         $review->save();
         return redirect('/reviews/add_review'.$review->id);
