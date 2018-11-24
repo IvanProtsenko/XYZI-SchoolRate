@@ -25,7 +25,7 @@
                                                     Стаж работы: {{$teacher->stage}} года
                                                 </div>
                                                 <div class="float-right">
-                                                    {{"rating"}}
+                                                    {{"??"}}
                                                 </div>
                                             </div>
                                         </div>
