@@ -19,7 +19,7 @@
                                         <div class="col">
                                             <div class="card-body">
                                                 <div class="float-left">
-                                                    Возраст: {{$teacher->age}}
+                                                    Дата рождения: {{$teacher->age==null?'':$teacher->age->format('Y-m-d')}}
                                                 </div>
                                                 <div class="text-center" style="margin-bottom: -33px">
                                                     Стаж работы: {{$teacher->stage}} года

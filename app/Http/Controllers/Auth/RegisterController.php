@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-        $user->age = Carbon::createFromFormat('Y-m-d', $data->age);
+        $user->age = Carbon::createFromFormat('Y-m-d', $data['age']);
 
         $user->save();
         return $user;
