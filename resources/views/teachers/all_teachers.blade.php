@@ -9,7 +9,8 @@
                                 <div class="card" style="border: 1px solid grey">
                                     <div class="card-footer">
                                         <div class="float-left" style="margin-bottom: -33px">
-                                            <h4><b>{{$teacher->name}}</b></h4>
+                                            <a href="{{url('/profile'.$teacher->id)}}">
+                                                <h4><b>{{$teacher->name}}</b></h4></a>
                                         </div>
                                         <div class="float-right" style="margin-right:15px">
                                             <b>{{$teacher->subject}}</b>
