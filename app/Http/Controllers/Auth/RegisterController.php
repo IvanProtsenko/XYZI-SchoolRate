@@ -55,7 +55,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'name' => 'required|string'
+            'name' => 'required|string',
+            'age' => 'required|date|date_format:Y-m-d'
         ]);
     }
 
@@ -72,6 +73,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        $user->age = Carbon::createFromFormat('Y-m-d', $data['age']);
 
         $user->save();
         return $user;
