@@ -8,7 +8,7 @@ use App\User;
 class ProfileController extends Controller
 {
     public function ShowProfile($id) {
-        $teachers = User::where('id', 1);
+        $teachers = User::findorFail(1);
         return view('/teachers/teacher_view', ['teachers' => $teachers]);
     }
     public function AddReview(Request $request) {
