@@ -14,23 +14,50 @@
     <div class="card" style="margin-right: 30px">
         <div class="card-footer text-white bg-dark">
             <div class="float-left" style="margin-bottom: -33px">
-                <h4><b>{{$teachers->name}}</b></h4>
+                <h4><b>{{$teacher->name}}</b></h4>
             </div>
             <div class="float-right" style="margin-right:15px">
-                <h5>Предмет: <b>{{$teachers->subject}}</b></h5>
+                <h5>Предмет: <b>{{$teacher->subject}}</b></h5>
             </div>
         </div>
         <div class="card-body">
             <div class="float-left">
-                Email: <b>{{$teachers->email}}</b>
+                Email: <b>{{$teacher->email}}</b>
             </div>
             <div class="text-center" style="margin-bottom: -33px">
-                Стаж работы: {{$teachers->stage}}, Дата рождения: {{$teachers->age->format('Y-m-d')}}
+                Стаж работы: {{$teacher->stage}}, Дата рождения: {{$teacher->age->format('Y-m-d')}}
             </div>
             <div class="float-right">
-                {{$teachers->status}}
+                {{$teacher->status}}
             </div>
         </div>
     </div>
+
+    </div>
+    @foreach($reviews as $review)
+        <div class="card" style="margin-right: 30px; margin-left: 510px; margin-top: 20px;">
+            <div class="card-footer text-white bg-dark">
+                <div class="float-left">
+                    <h6>Дата создания комментария: <b>{{$review->created_at}}</b></h6>
+                </div>
+            </div>
+            <div class="card-body">
+                {{$review->text}}
+            </div>
+        </div>
+    @endforeach
+    <div class="row" style="margin-right: 30px; margin-left: 510px; margin-top: 20px; border: 2px solid blue">
+
+    <form action="{{url('/profile'.$teacher->id.'/review/')}}" method="post"
+          style="margin-bottom: 0px;">
+        {{csrf_field()}}
+        <div class="form-group" style="margin-bottom: 0px; font-size: 90%;">
+            <label for="comment" style="">Новый комментарий:</label>
+            <textarea class="form-control" id="comment" rows="2"
+                      name="text"></textarea>
+            <input type="submit" value="Оставить отзыв" class="btn btn-primary"
+                   style="margin-top: 10px;"/>
+        </div>
+    </form>
     </div>
 @endsection
