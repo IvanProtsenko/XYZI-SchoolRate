@@ -46,16 +46,14 @@
             </div>
         </div>
     @endforeach
-    <div style="margin-right: 30px; margin-left: 510px;
-     margin-top: 20px; border: 2px solid blue; padding: 10px">
-
-    <form action="{{url('/profile'.$teacher->id.'/review/')}}" method="post">
-        {{csrf_field()}}
-        <label for="comment">Новый комментарий:</label>
-        <textarea class="form-control" id="comment" name="text"
-                  rows="3" placeholder="Оставьте свой комментарий тут"></textarea>
-        <input type="submit" value="Оставить отзыв" class="btn btn-primary"
-               style="margin-top: 10px;"/>
-    </form>
+    <div style="margin-right: 30px; margin-left: 510px; margin-top: 20px; border: 2px solid blue; padding: 10px">
+        <form action="{{url('/profile'.$teacher->id.'/review/')}}" method="post">
+            {{csrf_field()}}
+            <label for="comment">Новый комментарий:</label>
+            <textarea class="form-control" id="comment" name="text"
+                      rows="3" placeholder="Оставьте свой комментарий тут"></textarea>
+            <input type="submit" value="Оставить отзыв" class="btn btn-primary"
+                   style="margin-top: 10px;"/>
+        </form>
     </div>
 @endsection
