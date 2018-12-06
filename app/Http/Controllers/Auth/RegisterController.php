@@ -56,7 +56,8 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'name' => 'required|string',
-            'age' => 'required|date|date_format:Y-m-d'
+            'age' => 'required|date|date_format:Y-m-d',
+            'invite' => 'string'
         ]);
     }
 
@@ -72,9 +73,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'invite' => $data['invite']
         ]);
         $user->age = Carbon::createFromFormat('Y-m-d', $data['age']);
-
+        if($data['invite'] == "ABCD") {
+            $user->status = 'moderator';
+        }
         $user->save();
         return $user;
     }
