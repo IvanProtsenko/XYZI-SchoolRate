@@ -19,6 +19,7 @@ Route::get('/', function () {
 Route::get('/main', 'MainPageController@ShowList');
 Route::get('/profile{id}', 'ProfileController@ShowProfile');
 Route::post('/profile{teacher_id}/review', 'ProfileController@AddReview');
+Route::get('/profile{id}/delete_rev/{rev_id}', 'ProfileController@DeleteReview');
 
 Auth::routes();
 

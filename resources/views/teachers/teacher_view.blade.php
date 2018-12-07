@@ -35,17 +35,27 @@
 
     </div>
     @foreach($reviews as $review)
+        @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator")
         <div class="card" style="margin-right: 30px; margin-left: 510px; margin-top: 20px;">
             <div class="card-footer text-white bg-dark">
                 <div class="float-left">
                     <h6>Дата создания комментария: <b>{{$review->created_at}}</b></h6>
+                </div>
+                <div class="float-right">
+                    <h6 style="margin-left: -20px">Id отправящего: <b>{{$review->id_send}}</b></h6>
+                    @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator")
+                        <a href={{"/profile$teacher->id/delete_rev/$review->id"}}>
+                            <img src="https://png.icons8.com/windows/50/000000/cancel.png" width="25px"></a>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
                 {{$review->text}}
             </div>
         </div>
+        @endif
     @endforeach
+    @if(\Auth::User()->status != "moderator")
     <div style="margin-right: 30px; margin-left: 510px; margin-top: 20px; border: 2px solid blue; padding: 10px">
         <form action="{{url('/profile'.$teacher->id.'/review/')}}" method="post">
             {{csrf_field()}}
@@ -56,4 +66,5 @@
                    style="margin-top: 10px;"/>
         </form>
     </div>
+    @endif
 @endsection
