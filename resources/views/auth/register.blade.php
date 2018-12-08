@@ -54,13 +54,7 @@
 
                         <div class="form-group">
                             <label for="invite">Инвайт-код (для модератора)</label>
-                            <input id="invite" type="password" class="form-control" name="invite">
-
-                            @if ($errors->has('invite'))
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('invite') }}</strong>
-                                    </span>
-                            @endif
+                            <input id="invite" class="form-control" name="invite">
                         </div>
 
                         <div class="form-group">
