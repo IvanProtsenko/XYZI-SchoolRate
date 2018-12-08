@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
-                        @csrf
+                        {{ csrf_field() }}
 
                         <div class="form-group">
                             <label for="name">Ваше ФИО</label>
@@ -54,7 +54,7 @@
 
                         <div class="form-group">
                             <label for="invite">Инвайт-код (для модератора)</label>
-                            <input id="invite" class="form-control" name="invite">
+                            <input id="invite" class="form-control" name="invite" value="{{old('invite')}}">
                         </div>
 
                         <div class="form-group">

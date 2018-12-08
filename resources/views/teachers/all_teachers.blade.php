@@ -10,7 +10,7 @@
                         <div class="float-left" style="margin-bottom: -33px; margin-right: 150px">
                             <h4>@if(\Auth::User()->status == "moderator")
                                 <a href={{"/main/delete_teacher".$teacher->id}}>
-                                    <img src="https://png.icons8.com/windows/50/000000/cancel.png" width="25px"></a>
+                                    <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
                             @endif
                             <a href="{{url('/profile'.$teacher->id)}}">
                                 <b>{{$teacher->name}}</b></h4></a>

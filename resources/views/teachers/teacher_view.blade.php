@@ -35,10 +35,10 @@
     </div>
 
     @if(\Auth::User()->status != "moderator")
-    <div style="margin-right: 30px; margin-left: 510px; margin-top: 20px; border: 2px solid blue; padding: 10px">
-        <form action="{{url('/profile'.$teacher->id.'/review/')}}" method="post">
+    <div class="rounded border border-primary" style="margin-right: 30px; margin-left: 510px; margin-top: 20px; padding: 10px">
+        <form action="{{url('/profile'.$teacher->id.'/review')}}" method="post">
             {{csrf_field()}}
-            <label for="comment">Новый комментарий:</label>
+            <label for="comment"><b>Новый комментарий:</b></label>
             <textarea class="form-control" id="comment" name="text"
                       rows="3" placeholder="Оставьте свой комментарий тут"></textarea>
             <input type="submit" value="Оставить отзыв" class="btn btn-primary"
@@ -46,21 +46,28 @@
         </form>
     </div>
     @endif
-
+    @if(\Auth::User()->status == "moderator")
+        <h1 style="margin-right: 30px; margin-left: 510px; margin-top: 20px"><b>Комментарии к учителю:</b></h1>
+    @else
+        <h1 style="margin-right: 30px; margin-left: 510px; margin-top: 20px"><b>Ваши комментарии к учителю:</b></h1>
+    @endif
     @foreach($reviews as $review)
         @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator")
         <div class="card" style="margin-right: 30px; margin-left: 510px; margin-top: 20px;">
-            <div class="card-footer text-white bg-dark">
+            <div class="card-footer text-white bg-primary">
                 <div class="float-left">
-                    <h6>Дата создания комментария: <b>{{$review->created_at}}</b></h6>
+                    @if(\Auth::User()->status == "moderator")
+                        <h6>Дата создания комментария: <b>{{$review->created_at}},</b>
+                        Id отправящего: <b>{{$review->id_send}}</b></h6>
+                    @else
+                        <h6>Дата создания комментария: <b>{{$review->created_at}} </b></h6>
+                    @endif
                 </div>
                 <div class="float-right">
-                    @if(\Auth::User()->status == "moderator")
-                    <h6 style="margin-left: -20px">Id отправящего: <b>{{$review->id_send}}</b></h6>
-                    @endif
+
                     @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator")
                         <a href={{"/profile$teacher->id/delete_rev/$review->id"}}>
-                            <img src="https://png.icons8.com/windows/50/000000/cancel.png" width="25px"></a>
+                            <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
                     @endif
                 </div>
             </div>
