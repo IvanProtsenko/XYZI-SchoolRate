@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    @if(\Auth::User()->status != "moderator")
+    @if(\Auth::User()->status == "student")
     <div class="rounded border border-primary" style="margin-right: 30px; margin-left: 510px; margin-top: 20px; padding: 10px">
         <form action="{{url('/profile'.$teacher->id.'/review')}}" method="post">
             {{csrf_field()}}
@@ -48,7 +48,7 @@
     @endif
     @if(\Auth::User()->status == "moderator")
         <h1 style="margin-right: 30px; margin-left: 510px; margin-top: 20px"><b>Комментарии к учителю:</b></h1>
-    @else
+    @elseif(\Auth::User()->status == "student")
         <h1 style="margin-right: 30px; margin-left: 510px; margin-top: 20px"><b>Ваши комментарии к учителю:</b></h1>
     @endif
     @foreach($reviews as $review)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -33,7 +34,7 @@ class MainPageController extends Controller
         $teacher->status = "teacher";
         $teacher->age = $request->age;
         $teacher->stage = $request->stage;
-        $teacher->password = $request->password;
+        $teacher->password = Hash::make($request->password);
         $teacher->save();
         return redirect('/main');
     }

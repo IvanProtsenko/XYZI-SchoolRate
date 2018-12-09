@@ -54,7 +54,7 @@
 
                         <div class="form-group">
                             <label for="invite">Инвайт-код (для модератора)</label>
-                            <input id="invite" class="form-control" name="invite" value="{{old('invite')}}">
+                            <input id="invite" type="password" class="form-control" name="invite" value="{{old('invite')}}">
                         </div>
 
                         <div class="form-group">
