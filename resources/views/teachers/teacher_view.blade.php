@@ -56,15 +56,9 @@
         <div class="card" style="margin-right: 30px; margin-left: 510px; margin-top: 20px;">
             <div class="card-footer text-white bg-primary">
                 <div class="float-left">
-                    @if(\Auth::User()->status == "moderator")
-                        <h6>Дата создания комментария: <b>{{$review->created_at}},</b>
-                        Id отправящего: <b>{{$review->id_send}}</b></h6>
-                    @else
-                        <h6>Дата создания комментария: <b>{{$review->created_at}} </b></h6>
-                    @endif
+                    <h6>Дата создания комментария: <b>{{$review->created_at}} </b></h6>
                 </div>
                 <div class="float-right">
-
                     @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator")
                         <a href={{"/profile$teacher->id/delete_rev/$review->id"}}>
                             <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>

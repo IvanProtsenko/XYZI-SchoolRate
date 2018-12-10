@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for='age'>Дата рождения</label>
+                            <label for='age'>Дата рождения <b>(Вводите дату рождения в формате Год-месяц-день)</b></label>
 
                             <input id='age' type="text" class="form-control date" name='age'
                                    value="{{old('age')}}" required>
