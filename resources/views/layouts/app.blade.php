@@ -23,7 +23,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md  navbar-dark bg-dark">
             <div class="container">
-                @if(url()->current() != 'http://127.0.0.1:8000/main')
+                @if(url()->current() != 'http://127.0.0.1:8000/main' && url()->current() !=
+                'http://127.0.0.1:8000/register' && url()->current() != 'http://127.0.0.1:8000/login')
                 <a style="margin-left: -180px; margin-right: 85px" class="navbar-brand" href="{{ url('/main') }}">
                     <b>На главную</b>
                 </a>
