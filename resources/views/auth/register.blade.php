@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
-                        @csrf
+                        {{ csrf_field() }}
 
                         <div class="form-group">
                             <label for="name">Ваше ФИО</label>
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for='age'>Дата рождения</label>
+                            <label for='age'>Дата рождения <b>(Вводите дату рождения в формате Год-месяц-день)</b></label>
 
                             <input id='age' type="text" class="form-control date" name='age'
                                    value="{{old('age')}}" required>
@@ -54,13 +54,7 @@
 
                         <div class="form-group">
                             <label for="invite">Инвайт-код (для модератора)</label>
-                            <input id="invite" type="password" class="form-control" name="invite">
-
-                            @if ($errors->has('invite'))
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('invite') }}</strong>
-                                    </span>
-                            @endif
+                            <input id="invite" type="password" class="form-control" name="invite" value="{{old('invite')}}">
                         </div>
 
                         <div class="form-group">

@@ -23,7 +23,13 @@
     <div id="app">
         <nav class="navbar navbar-expand-md  navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/main') }}">
+                @if(url()->current() != 'http://127.0.0.1:8000/main' && url()->current() !=
+                'http://127.0.0.1:8000/register' && url()->current() != 'http://127.0.0.1:8000/login')
+                <a style="margin-left: -180px; margin-right: 85px" class="navbar-brand" href="{{ url('/main') }}">
+                    <b>На главную</b>
+                </a>
+                @endif
+                <a style="margin-left: 150px" class="navbar-brand" href="{{ url('/main') }}">
                     <b>SchoolRate</b>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

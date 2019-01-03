@@ -7,9 +7,13 @@
             @foreach($teachers as $teacher)
                 <div class="card" style="margin-left: 30px;">
                     <div class="card-footer bg-light text-dark">
-                        <div class="float-left" style="margin-bottom: -33px">
+                        <div class="float-left" style="margin-bottom: -33px; margin-right: 150px">
+                            <h4>@if(\Auth::User()->status == "moderator")
+                                <a href={{"/main/delete_teacher".$teacher->id}}>
+                                    <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
+                            @endif
                             <a href="{{url('/profile'.$teacher->id)}}">
-                                <h4><b>{{$teacher->name}}</b></h4></a>
+                                <b>{{$teacher->name}}</b></h4></a>
                         </div>
                         <div class="float-right" style="margin-right:15px">
                             <b>{{$teacher->subject}}</b>
@@ -59,6 +63,13 @@
                     </form>
                 </div>
             </div>
+            <br>
+            @if(\Auth::User()->status == "moderator")
+                <div style="margin-right: 30px">
+                    <a href="{{url('/main/add_teacher')}}"
+                        class = "btn btn-primary btn-lg btn-block">Добавить учителя</a>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
