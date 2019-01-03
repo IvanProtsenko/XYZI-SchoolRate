@@ -4,11 +4,8 @@
     <div class="card-group">
         <div class="col-md-4">
             <div class="card" style="margin-left: 30px; margin-right: 50px; width: 400px;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and ma
-                ke up the bulk of the card's content.</p>
-                </div>
+                <img class="card-img-top"
+                     src="{{url('/media/'.$user->img)}}"/>
             </div>
         </div>
         <div class="card" style="margin-right: 30px">

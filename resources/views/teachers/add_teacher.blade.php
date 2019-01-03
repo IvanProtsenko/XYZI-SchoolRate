@@ -30,6 +30,16 @@
             <input name="stage" class="form-control" >
         </div>
 
+        <div class="form-group{{ $errors->has('img') ? ' has-error' : '' }}">
+            <label for="img">Фотография учителя</label>
+
+            <input id="img" type="file" class="form-control" name="img"/>
+
+            @if ($errors->has('img'))
+                <span class="help-block error-block"><strong>{{ $errors->first('img') }}</strong></span>
+            @endif
+        </div>
+
         <div class = "form-group required">
             <label>Пароль</label>
             <input type="password" name="password" class="form-control" required>
