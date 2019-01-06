@@ -27,3 +27,5 @@ Route::post('/main/add_teacher', 'MainPageController@AddTeacher');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('media/{dir}/{name}', 'MediaController@index');
