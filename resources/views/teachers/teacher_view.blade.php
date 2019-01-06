@@ -5,7 +5,7 @@
         <div class="col-md-4">
             <div class="card" style="margin-left: 30px; margin-right: 50px; width: 400px;">
                 <img class="card-img-top"
-                     src="{{url('/media/'.$user->img)}}"/>
+                     src="{{url('/media/'.$teacher->image)}}"/>
             </div>
         </div>
         <div class="card" style="margin-right: 30px">

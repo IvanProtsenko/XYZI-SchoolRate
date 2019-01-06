@@ -3,7 +3,7 @@
 @section('content')
     <br>
     <h2 style="margin-top: -25px; margin-left: 30px">Добавить учителя</h2>
-    <form method="POST" style="margin-right: 30px; margin-left: 30px">
+    <form method="POST" style="margin-right: 30px; margin-left: 30px" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class = "form-group required">
             <label>ФИО учителя</label>
@@ -30,13 +30,13 @@
             <input name="stage" class="form-control" >
         </div>
 
-        <div class="form-group{{ $errors->has('img') ? ' has-error' : '' }}">
-            <label for="img">Фотография учителя</label>
+        <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+            <label for="image">Фотография учителя</label>
 
-            <input id="img" type="file" class="form-control" name="img"/>
+            <input id="image" type="file" class="form-control" name="image" />
 
-            @if ($errors->has('img'))
-                <span class="help-block error-block"><strong>{{ $errors->first('img') }}</strong></span>
+            @if ($errors->has('image'))
+                <span class="help-block error-block"><strong>{{ $errors->first('image') }}</strong></span>
             @endif
         </div>
 
