@@ -24,6 +24,10 @@ Route::get('/profile{id}/delete_rev/{rev_id}', 'ProfileController@DeleteReview')
 Route::get('/main/delete_teacher{id}', 'MainPageController@DeleteTeacher');
 Route::get('/main/add_teacher', 'MainPageController@AddTeacherView');
 Route::post('/main/add_teacher', 'MainPageController@AddTeacher');
+Route::get('/main/{teacher_id}/like_from_main', 'MainPageController@LikeFromMain');
+Route::get('/main/{teacher_id}/dislike_from_main', 'MainPageController@DislikeFromMain');
+Route::get('/main/{teacher_id}/like', 'MainPageController@Like');
+Route::get('/main/{teacher_id}/dislike', 'MainPageController@Dislike');
 
 Auth::routes();
 

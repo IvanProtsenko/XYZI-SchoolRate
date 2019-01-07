@@ -13,7 +13,14 @@
                                     <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
                             @endif
                             <a href="{{url('/profile'.$teacher->id)}}">
-                                <b>{{$teacher->name}}</b></h4></a>
+                                <b>{{$teacher->name}}</b></a>
+
+                                <a href={{"/main/$teacher->id/like_from_main"}}>
+                                    <img src="https://img.icons8.com/ios-glyphs/30/000000/thumb-up.png">
+                                    </a>
+                                <a href={{"/main/$teacher->id/dislike_from_main"}}>
+                                    <img src="https://img.icons8.com/ios-glyphs/30/000000/thumbs-down.png">
+                                </a></h4>
                         </div>
                         <div class="float-right" style="margin-right:15px">
                             <b>{{$teacher->subject}}</b>
@@ -48,7 +55,7 @@
                         {{ csrf_field() }}
                         <div class="form-group form-check">
                             <div class="form-check">
-                                <input type="radio" @if($selected == "1") checked @endif style="margin-left:-20px" name="sort" class="form-check-input" value="1">
+                                <input type="radio" @if($selected == "1" || $selected=="0") checked @endif style="margin-left:-20px" name="sort" class="form-check-input" value="1">
                                 <label for="sort" class="form-check-label" style="margin-left:2px" >имени</label>
                             </div>
                             <div class="form-check">

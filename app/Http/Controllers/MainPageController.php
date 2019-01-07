@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Rating;
 
 class MainPageController extends Controller
 {
@@ -62,5 +64,63 @@ class MainPageController extends Controller
         }
         $teacher->save();
         return redirect('/main');
+    }
+    public function LikeFromMain($teacher_id)
+    {
+        if($rating = Rating::where('teacher_id', $teacher_id)->where('user_id', \Auth::User()->id)->first()) {
+            $rating->rate = true;
+        }
+        else {
+            $rating = new Rating;
+            $rating->teacher_id = $teacher_id;
+            $rating->user_id = \Auth::User()->id;
+            $rating->rate = true;
+        }
+        $rating->save();
+        return redirect('/main');
+    }
+    public function DislikeFromMain($teacher_id)
+    {
+        if($rating = Rating::where('teacher_id', $teacher_id)->where('user_id', \Auth::User()->id)->first()) {
+            $rating->rate = false;
+        }
+        else {
+            $rating = new Rating;
+            $rating->teacher_id = $teacher_id;
+            $rating->user_id = \Auth::User()->id;
+            $rating->rate = false;
+        }
+        $rating->save();
+        return redirect('/main');
+    }
+    public function Like($teacher_id)
+    {
+        if($rating = Rating::where('teacher_id', $teacher_id)->where('user_id', \Auth::User()->id)->first()) {
+            $rating->rate = true;
+        }
+        else {
+            $rating = new Rating;
+            $rating->teacher_id = $teacher_id;
+            $rating->user_id = \Auth::User()->id;
+            $rating->rate = true;
+        }
+        $rating->save();
+        $likes = count(Rating::where('teacher_id', $teacher_id));
+        return redirect('/profile'.$teacher_id);
+    }
+    public function Dislike($teacher_id)
+    {
+        if($rating = Rating::where('teacher_id', $teacher_id)->where('user_id', \Auth::User()->id)->first()) {
+            $rating->rate = false;
+        }
+        else {
+            $rating = new Rating;
+            $rating->teacher_id = $teacher_id;
+            $rating->user_id = \Auth::User()->id;
+            $rating->rate = false;
+        }
+        $rating->save();
+        $likes = count(Rating::where('teacher_id', $teacher_id));
+        return redirect('/profile'.$teacher_id);
     }
 }

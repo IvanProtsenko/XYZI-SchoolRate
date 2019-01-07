@@ -25,7 +25,12 @@
                     Стаж работы: {{$teacher->stage}}, Дата рождения: {{$teacher->age->format('Y-m-d')}}
                 </div>
                 <div class="float-right">
-                    {{$teacher->status}}
+                    <a href={{"/main/$teacher->id/like"}}>
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/thumb-up.png">
+                    </a>
+                    <a href={{"/main/$teacher->id/dislike"}}>
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/thumbs-down.png">
+                    </a>
                 </div>
             </div>
         </div>
