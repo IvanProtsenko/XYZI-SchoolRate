@@ -48,12 +48,16 @@
                         {{ csrf_field() }}
                         <div class="form-group form-check">
                             <div class="form-check">
-                                <input type="radio" checked style="margin-left:-20px" name="sel_tags[]" class="form-check-input" value="" id="">
-                                <label for="" class="form-check-label" style="margin-left:2px" >имени</label>
+                                <input type="radio" @if($selected == "1") checked @endif style="margin-left:-20px" name="sort" class="form-check-input" value="1">
+                                <label for="sort" class="form-check-label" style="margin-left:2px" >имени</label>
                             </div>
                             <div class="form-check">
-                                <input type="radio" style="margin-left:-20px" name="sel_tags[]" class="form-check-input" value="" id="">
-                                <label for="" class="form-check-label" style="margin-left:2px" >рейтингу</label>
+                                <input type="radio" @if($selected == "2") checked @endif style="margin-left:-20px" name="sort" class="form-check-input" value="2">
+                                <label for="sort" class="form-check-label" style="margin-left:2px" >предмету</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" @if($selected == "3") checked @endif style="margin-left:-20px" name="sort" class="form-check-input" value="3">
+                                <label for="sort" class="form-check-label" style="margin-left:2px" >рейтингу</label>
                             </div>
                             <br>
                             <div class="float-left">

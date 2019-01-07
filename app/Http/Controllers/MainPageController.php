@@ -9,9 +9,20 @@ use App\User;
 
 class MainPageController extends Controller
 {
-    public function ShowList() {
-        $teachers = User::all()->where('status', 'teacher');
-        return view('/teachers/all_teachers', ['teachers' => $teachers]);
+    public function ShowList(Request $request) {
+        $selected = 0;
+        if(isset($request->sort)) {
+            $selected = $request->sort;
+            if($request->sort == "2") {
+                $teachers = User::all()->where('status', 'teacher')->sortBy('subject');
+
+            }
+            else $teachers = User::all()->where('status', 'teacher')->sortBy('name');
+        }
+        else {
+            $teachers = User::all()->where('status', 'teacher')->sortBy('name');
+        }
+        return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => $selected]);
     }
     public function DeleteTeacher($id)
     {
