@@ -26,6 +26,20 @@ class MainPageController extends Controller
         }
         return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => $selected]);
     }
+    public function ShowList2($sort) {
+        $selected = 0;
+        if($sort > 0) {
+            $selected = $sort;
+            if($sort == "2") {
+                $teachers = User::all()->where('status', 'teacher')->sortBy('subject');
+            }
+            else $teachers = User::all()->where('status', 'teacher')->sortBy('name');
+        }
+        else {
+            $teachers = User::all()->where('status', 'teacher')->sortBy('name');
+        }
+        return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => $selected]);
+    }
     public function DeleteTeacher($id)
     {
         $teacher = User::findOrFail($id);
@@ -65,7 +79,7 @@ class MainPageController extends Controller
         $teacher->save();
         return redirect('/main');
     }
-    public function LikeFromMain($teacher_id)
+    public function LikeFromMain($teacher_id, $sort)
     {
         if($rating = Rating::where('teacher_id', $teacher_id)->where('user_id', \Auth::User()->id)->first()) {
             $rating->rate = true;
@@ -79,7 +93,7 @@ class MainPageController extends Controller
         $rating->save();
         return redirect('/main');
     }
-    public function DislikeFromMain($teacher_id)
+    public function DislikeFromMain($teacher_id, $sort)
     {
         if($rating = Rating::where('teacher_id', $teacher_id)->where('user_id', \Auth::User()->id)->first()) {
             $rating->rate = false;

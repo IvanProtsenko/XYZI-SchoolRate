@@ -14,13 +14,15 @@
                             @endif
                             <a href="{{url('/profile'.$teacher->id)}}">
                                 <b>{{$teacher->name}}</b></a>
-
-                                <a href={{"/main/$teacher->id/like_from_main"}}>
-                                    <img src="https://img.icons8.com/ios-glyphs/30/000000/thumb-up.png">
+                                @if(\Auth::User()->status == "student")
+                                    <a href={{"/main/$teacher->id/like_from_main/$selected"}}>
+                                        <img src="https://img.icons8.com/ios-glyphs/30/000000/thumb-up.png">
                                     </a>
-                                <a href={{"/main/$teacher->id/dislike_from_main"}}>
-                                    <img src="https://img.icons8.com/ios-glyphs/30/000000/thumbs-down.png">
-                                </a></h4>
+                                    <a href={{"/main/$teacher->id/dislike_from_main/$selected"}}>
+                                        <img src="https://img.icons8.com/ios-glyphs/30/000000/thumbs-down.png">
+                                    </a>
+                                @endif
+                            </h4>
                         </div>
                         <div class="float-right" style="margin-right:15px">
                             <b>{{$teacher->subject}}</b>
