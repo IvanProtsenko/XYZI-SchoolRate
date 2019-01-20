@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\RedirectResponse;
 use App\User;
 use App\Rating;
 
@@ -15,28 +19,22 @@ class MainPageController extends Controller
         $selected = 0;
         if(isset($request->sort)) {
             $selected = $request->sort;
-            if($request->sort == "2") {
+            if($selected == "2") {
                 $teachers = User::all()->where('status', 'teacher')->sortBy('subject');
-
+            }
+            elseif($request->sort == "3") {
+                $teachers = User::all()->where('status', 'teacher')->sortByDesc('likes');
             }
             else $teachers = User::all()->where('status', 'teacher')->sortBy('name');
         }
         else {
             $teachers = User::all()->where('status', 'teacher')->sortBy('name');
         }
-        return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => $selected]);
-    }
-    public function ShowList2($sort) {
-        $selected = 0;
-        if($sort > 0) {
-            $selected = $sort;
-            if($sort == "2") {
-                $teachers = User::all()->where('status', 'teacher')->sortBy('subject');
-            }
-            else $teachers = User::all()->where('status', 'teacher')->sortBy('name');
-        }
-        else {
-            $teachers = User::all()->where('status', 'teacher')->sortBy('name');
+        foreach($teachers as $teacher) {
+            $rating = Rating::all()->where('teacher_id', $teacher->id);
+            if($rating != null && count($rating) != 0) $teacher->likes = intval(count($rating->where('rate', 1))/count($rating)*100);
+            else $teacher->likes = -1;
+            $teacher->save();
         }
         return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => $selected]);
     }
@@ -79,7 +77,7 @@ class MainPageController extends Controller
         $teacher->save();
         return redirect('/main');
     }
-    public function LikeFromMain($teacher_id, $sort)
+    public function LikeFromMain($teacher_id)
     {
         if($rating = Rating::where('teacher_id', $teacher_id)->where('user_id', \Auth::User()->id)->first()) {
             $rating->rate = true;
@@ -91,9 +89,9 @@ class MainPageController extends Controller
             $rating->rate = true;
         }
         $rating->save();
-        return redirect('/main');
+        return redirect()->back();
     }
-    public function DislikeFromMain($teacher_id, $sort)
+    public function DislikeFromMain($teacher_id)
     {
         if($rating = Rating::where('teacher_id', $teacher_id)->where('user_id', \Auth::User()->id)->first()) {
             $rating->rate = false;
@@ -105,7 +103,7 @@ class MainPageController extends Controller
             $rating->rate = false;
         }
         $rating->save();
-        return redirect('/main');
+        return redirect()->back();
     }
     public function Like($teacher_id)
     {
@@ -119,7 +117,6 @@ class MainPageController extends Controller
             $rating->rate = true;
         }
         $rating->save();
-        $likes = count(Rating::where('teacher_id', $teacher_id));
         return redirect('/profile'.$teacher_id);
     }
     public function Dislike($teacher_id)
@@ -134,7 +131,6 @@ class MainPageController extends Controller
             $rating->rate = false;
         }
         $rating->save();
-        $likes = count(Rating::where('teacher_id', $teacher_id));
         return redirect('/profile'.$teacher_id);
     }
 }

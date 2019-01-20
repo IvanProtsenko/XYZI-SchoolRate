@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 
 Route::get('/main', 'MainPageController@ShowList');
-Route::post('/main', 'MainPageController@ShowList');
+//Route::post('/main', 'MainPageController@ShowList');
 Route::get('/profile{id}', 'ProfileController@ShowProfile');
 Route::post('/profile{teacher_id}/review', 'ProfileController@AddReview');
 Route::get('/profile{id}/delete_rev/{rev_id}', 'ProfileController@DeleteReview');
@@ -27,10 +27,10 @@ Route::get('/main/add_teacher', 'MainPageController@AddTeacherView');
 Route::post('/main/add_teacher', 'MainPageController@AddTeacher');
 
 Route::get('/main/{teacher_id}/like_from_main/{sort}', 'MainPageController@LikeFromMain');
-Route::post('/main/{teacher_id}/like_from_main/{sort}', 'MainPageController@ShowList2');
+Route::post('/main/{teacher_id}/like_from_main/{sort}', 'MainPageController@ShowList');
 
 Route::get('/main/{teacher_id}/dislike_from_main/{sort}', 'MainPageController@DislikeFromMain');
-Route::post('/main/{teacher_id}/dislike_from_main/{sort}', 'MainPageController@ShowList2');
+Route::post('/main/{teacher_id}/dislike_from_main/{sort}', 'MainPageController@ShowList');
 
 Route::get('/main/{teacher_id}/like', 'MainPageController@Like');
 Route::get('/main/{teacher_id}/dislike', 'MainPageController@Dislike');

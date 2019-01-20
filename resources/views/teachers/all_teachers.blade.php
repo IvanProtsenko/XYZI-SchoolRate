@@ -22,6 +22,9 @@
                                         <img src="https://img.icons8.com/ios-glyphs/30/000000/thumbs-down.png">
                                     </a>
                                 @endif
+                                @if($teacher->likes > -1){{$teacher->likes}}%
+                                    @else Нет отзывов
+                                    @endif
                             </h4>
                         </div>
                         <div class="float-right" style="margin-right:15px">
@@ -53,7 +56,7 @@
                     <h2>Сортировать по:</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST">
+                    <form method="GET">
                         {{ csrf_field() }}
                         <div class="form-group form-check">
                             <div class="form-check">
