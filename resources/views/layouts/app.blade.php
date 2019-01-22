@@ -38,9 +38,10 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Искать учителя" aria-label="Search">
-                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Поиск</button>
+                    <form method="POST" class="form-inline">
+                        {{ csrf_field() }}
+                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Искать учителя">
+                        <a href="{{"/main/search"}}" class="btn btn-primary my-2 my-sm-0" type="submit">Поиск</a>
                     </form>
 
                     <!-- Right Side Of Navbar -->

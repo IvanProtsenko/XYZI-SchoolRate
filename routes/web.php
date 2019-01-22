@@ -26,6 +26,9 @@ Route::get('/main/delete_teacher{id}', 'MainPageController@DeleteTeacher');
 Route::get('/main/add_teacher', 'MainPageController@AddTeacherView');
 Route::post('/main/add_teacher', 'MainPageController@AddTeacher');
 
+Route::get('/main/search', 'MainPageController@search');
+Route::post('/main/search', 'MainPageController@search');
+
 Route::get('/main/{teacher_id}/like_from_main/{sort}', 'MainPageController@LikeFromMain');
 Route::post('/main/{teacher_id}/like_from_main/{sort}', 'MainPageController@ShowList');
 

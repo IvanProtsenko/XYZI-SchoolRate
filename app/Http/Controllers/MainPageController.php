@@ -133,4 +133,9 @@ class MainPageController extends Controller
         $rating->save();
         return redirect('/profile'.$teacher_id);
     }
+    public function Search(Request $request)
+    {
+        $teachers = User::all()->where('name','like', '%'.$request->search.'%');
+        return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => 0]);
+    }
 }
