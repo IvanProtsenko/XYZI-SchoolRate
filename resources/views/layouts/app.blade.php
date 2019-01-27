@@ -38,11 +38,13 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <form method="POST" class="form-inline">
+                    @if(url()->current() != 'http://127.0.0.1:8000/register' && url()->current() != 'http://127.0.0.1:8000/login')
+                    <form method="GET" class="form-inline">
                         {{ csrf_field() }}
                         <input class="form-control mr-sm-2" name="search" type="text" placeholder="Искать учителя">
-                        <a href="{{"/main/search"}}" class="btn btn-primary my-2 my-sm-0" type="submit">Поиск</a>
+                        <input type="submit" value="Поиск" class = "btn btn-primary">
                     </form>
+                    @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

@@ -13,8 +13,11 @@ class ProfileController extends Controller
     public function ShowProfile($id) {
         $teacher = User::findorFail($id);
         $reviews = Review::all()->where('id_get', $id);
-        $likes = count(Rating::where('teacher_id', $id));
-        return view('/teachers/teacher_view', ['teacher' => $teacher], ['reviews' => $reviews], ['likes' => $likes]);
+        $rating = Rating::all()->where('teacher_id', $id);
+        if($rating != null && count($rating) != 0) $teacher->likes = intval(count($rating->where('rate', 1))/count($rating)*100);
+        else $teacher->likes = -1;
+        $teacher->save();
+        return view('/teachers/teacher_view', ['teacher' => $teacher], ['reviews' => $reviews]);
     }
     public function AddReview($teacher_id, Request $request) {
         $teacher = User::findorFail($teacher_id);

@@ -39,9 +39,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for='age'>Дата рождения <b>(Вводите дату рождения в формате Год-месяц-день)</b></label>
+                            <label for='age'>Дата рождения </label>
 
-                            <input id='age' type="text" class="form-control date" name='age'
+                            <input id='age' type="date" class="form-control date" name='age'
                                    value="{{old('age')}}" required>
                             <span class="help-block text-primary"><strong>Это обязательное поле.</strong></span>
 
@@ -53,12 +53,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="invite">Инвайт-код (для модератора)</label>
-                            <input id="invite" type="password" class="form-control" name="invite" value="{{old('invite')}}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">Пароль</label>
+                            <label for="password">Пароль<b> (минимальная длина пароля - 6 символов)</b></label>
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -74,6 +69,13 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                         </div>
 
+                        <input type="checkbox" name="multi_note" value="1" onclick="showMe(this)" style="margin-bottom: 10px">
+                        <b> Я модератор</b>
+                        <div id="div1" class="form-group" style="display:block; display:none;">
+                            <label for="invite">Инвайт-код <b>(оставьте поле пустым, если вы ученик или учитель)</b></label>
+                            <input id="invite" type="password" class="form-control" name="invite" value="{{old('invite')}}">
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">
@@ -87,4 +89,10 @@
         </div>
     </div>
 </div>
+<script>
+    function showMe (box) {
+        var vis = (box.checked) ? "block" : "none";
+        document.getElementById('div1').style.display = vis;
+    }
+</script>
 @endsection

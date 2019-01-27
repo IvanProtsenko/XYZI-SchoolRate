@@ -30,12 +30,16 @@ class MainPageController extends Controller
         else {
             $teachers = User::all()->where('status', 'teacher')->sortBy('name');
         }
+        if(isset($request->search)) {
+            $teachers = User::all()->where('name', $request->search)->where('status', 'teacher');
+        }
         foreach($teachers as $teacher) {
             $rating = Rating::all()->where('teacher_id', $teacher->id);
             if($rating != null && count($rating) != 0) $teacher->likes = intval(count($rating->where('rate', 1))/count($rating)*100);
             else $teacher->likes = -1;
             $teacher->save();
         }
+
         return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => $selected]);
     }
     public function DeleteTeacher($id)
@@ -117,7 +121,7 @@ class MainPageController extends Controller
             $rating->rate = true;
         }
         $rating->save();
-        return redirect('/profile'.$teacher_id);
+        return redirect()->back();
     }
     public function Dislike($teacher_id)
     {
@@ -131,11 +135,6 @@ class MainPageController extends Controller
             $rating->rate = false;
         }
         $rating->save();
-        return redirect('/profile'.$teacher_id);
-    }
-    public function Search(Request $request)
-    {
-        $teachers = User::all()->where('name','like', '%'.$request->search.'%');
-        return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => 0]);
+        return redirect()->back();
     }
 }

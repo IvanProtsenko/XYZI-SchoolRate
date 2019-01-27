@@ -8,7 +8,8 @@
                 <div class="card" style="margin-left: 30px;">
                     <div class="card-footer bg-light text-dark">
                         <div class="float-left" style="margin-bottom: -33px; margin-right: 150px">
-                            <h4>@if(\Auth::User()->status == "moderator")
+                            <h4>
+                                @if(\Auth::User()->status == "moderator")
                                 <a href={{"/main/delete_teacher".$teacher->id}}>
                                     <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
                             @endif
@@ -22,8 +23,8 @@
                                         <img src="https://img.icons8.com/ios-glyphs/30/000000/thumbs-down.png">
                                     </a>
                                 @endif
-                                @if($teacher->likes > -1){{$teacher->likes}}%
-                                    @else Нет отзывов
+                                    @if($teacher->likes > -1)<b>{{$teacher->likes}}%</b>
+                                    @else <b>Нет отзывов</b>
                                     @endif
                             </h4>
                         </div>
@@ -37,11 +38,8 @@
                                 <div class="float-left">
                                     Дата рождения: {{$teacher->age==null?'':$teacher->age->format('Y-m-d')}}
                                 </div>
-                                <div class="text-center" style="margin-bottom: -33px">
-                                    Стаж работы: {{$teacher->stage}} года
-                                </div>
-                                <div class="float-right">
-                                    {{"??"}}
+                                <div id = "stage" class="float-right stage">
+                                    Стаж работы: {{$teacher->stage}}
                                 </div>
                             </div>
                         </div>
@@ -88,4 +86,12 @@
             @endif
         </div>
     </div>
+    <script type="text/javascript">
+        //document.getElementById("age").addEventListener("change", function(){
+            //if(age % 10 == 1 && age != 11){}
+            //else if(age % 10 > 1 && age % 10 < 5 && (age < 12 || age > 14)){}
+            //else {}
+
+            document.getElementsByClassName('stage').innerHTML += " лет";
+    </script>
 @endsection
