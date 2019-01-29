@@ -40,3 +40,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('media/{dir}/{name}', 'MediaController@index');
+
+Route::get('/main/feedback', 'FeedbackController@ShowFeedback');
+Route::get('/main/accept_rev/{id}', 'FeedbackController@Accept');
+

@@ -40,6 +40,6 @@ class ProfileController extends Controller
         {
             $review->delete();
         }
-        return redirect('/profile'.$id);
+        return redirect()->back();
     }
 }

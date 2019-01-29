@@ -50,16 +50,18 @@
                 </form>
             </div>
             @endif
-            @if(\Auth::User()->status == "moderator")
+            @if(\Auth::User()->status == "moderator" || \Auth::User()->status == "director")
                 <h1 style="margin-top: 20px; margin-bottom: 20px"><b>Комментарии к учителю:</b></h1>
             @elseif(\Auth::User()->status == "student")
                 <h1 style="margin-top: 20px; margin-bottom: 20px"><b>Ваши комментарии к учителю:</b></h1>
             @endif
             @foreach($reviews as $review)
-                @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator")
+                @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator"
+                || (\Auth::User()->status == "moderator" || $review->status == "accepted"))
                     <div class="jumbotron" style="padding: 20px">
                         <h4 class="display-6">Дата создания комментария: <b>{{$review->created_at}}</b>
-                            @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator")
+                            @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator"
+                            || (\Auth::User()->status == "moderator" || $review->status == "accepted"))
                                 <a href={{"/profile$teacher->id/delete_rev/$review->id"}}>
                                     <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
                             @endif

@@ -78,12 +78,19 @@
                 </div>
             </div>
             <br>
-            @if(\Auth::User()->status == "moderator")
+            @if(\Auth::User()->status == "director" || \Auth::User()->status == "moderator")
                 <div style="margin-right: 30px">
-                    <a href="{{url('/main/add_teacher')}}"
-                        class = "btn btn-primary btn-lg btn-block">Добавить учителя</a>
+                    <a href="{{url('/main/feedback')}}"
+                       class = "btn btn-primary btn-lg btn-block">Просмотреть отзывы</a>
                 </div>
+                @if(\Auth::User()->status == "moderator")
+                    <div style="margin-right: 30px; margin-top: 20px">
+                        <a href="{{url('/main/add_teacher')}}"
+                            class = "btn btn-primary btn-lg btn-block">Добавить учителя</a>
+                    </div>
+                @endif
             @endif
+
         </div>
     </div>
     <script type="text/javascript">
