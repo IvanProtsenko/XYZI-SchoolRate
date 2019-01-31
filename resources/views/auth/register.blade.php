@@ -70,18 +70,16 @@
                         </div>
 
                         <input type="checkbox" name="multi_note" value="1" onclick="showMe(this)" style="margin-bottom: 10px">
-                        <b> Я модератор</b>
+                        <b> Я модератор или директор</b>
                         <div id="div1" class="form-group" style="display:block; display:none;">
                             <label for="invite">Инвайт-код <b>(оставьте поле пустым, если вы ученик или учитель)</b></label>
                             <input id="invite" type="password" class="form-control" name="invite" value="{{old('invite')}}">
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">
-                                    Зарегистрироваться
-                                </button>
-                            </div>
+                        <div class="form-group" style="margin-top: 10px">
+                            <button type="submit" class="btn btn-primary">
+                                Зарегистрироваться
+                            </button>
                         </div>
                     </form>
                 </div>
