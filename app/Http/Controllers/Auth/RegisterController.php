@@ -78,6 +78,9 @@ class RegisterController extends Controller
         if($data['invite'] == "ABCD") {
             $user->status = 'moderator';
         }
+        elseif($data['invite'] == "DIR") {
+            $user->status = 'director';
+        }
         $user->save();
         return $user;
     }

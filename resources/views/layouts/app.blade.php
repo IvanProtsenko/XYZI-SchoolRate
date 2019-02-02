@@ -38,10 +38,13 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Искать учителя" aria-label="Search">
-                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Поиск</button>
+                    @if(url()->current() != 'http://127.0.0.1:8000/register' && url()->current() != 'http://127.0.0.1:8000/login')
+                    <form method="GET" class="form-inline">
+                        {{ csrf_field() }}
+                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Искать учителя">
+                        <input type="submit" value="Поиск" class = "btn btn-primary">
                     </form>
+                    @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -65,7 +68,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Выйти
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

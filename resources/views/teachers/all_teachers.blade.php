@@ -8,12 +8,25 @@
                 <div class="card" style="margin-left: 30px;">
                     <div class="card-footer bg-light text-dark">
                         <div class="float-left" style="margin-bottom: -33px; margin-right: 150px">
-                            <h4>@if(\Auth::User()->status == "moderator")
+                            <h4>
+                                @if(\Auth::User()->status == "moderator")
                                 <a href={{"/main/delete_teacher".$teacher->id}}>
                                     <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
                             @endif
                             <a href="{{url('/profile'.$teacher->id)}}">
-                                <b>{{$teacher->name}}</b></h4></a>
+                                <b>{{$teacher->name}}</b></a>
+                                @if(\Auth::User()->status == "student")
+                                    <a href={{"/main/$teacher->id/like_from_main/$selected"}}>
+                                        <img src="https://img.icons8.com/ios-glyphs/30/000000/thumb-up.png">
+                                    </a>
+                                    <a href={{"/main/$teacher->id/dislike_from_main/$selected"}}>
+                                        <img src="https://img.icons8.com/ios-glyphs/30/000000/thumbs-down.png">
+                                    </a>
+                                @endif
+                                    @if($teacher->likes > -1)<b>{{$teacher->likes}}%</b>
+                                    @else <b>Нет отзывов</b>
+                                    @endif
+                            </h4>
                         </div>
                         <div class="float-right" style="margin-right:15px">
                             <b>{{$teacher->subject}}</b>
@@ -25,11 +38,8 @@
                                 <div class="float-left">
                                     Дата рождения: {{$teacher->age==null?'':$teacher->age->format('Y-m-d')}}
                                 </div>
-                                <div class="text-center" style="margin-bottom: -33px">
-                                    Стаж работы: {{$teacher->stage}} года
-                                </div>
-                                <div class="float-right">
-                                    {{"??"}}
+                                <div id = "stage" class="float-right stage">
+                                    Стаж работы: {{$teacher->stage}}
                                 </div>
                             </div>
                         </div>
@@ -44,16 +54,20 @@
                     <h2>Сортировать по:</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST">
+                    <form method="GET">
                         {{ csrf_field() }}
                         <div class="form-group form-check">
                             <div class="form-check">
-                                <input type="radio" checked style="margin-left:-20px" name="sel_tags[]" class="form-check-input" value="" id="">
-                                <label for="" class="form-check-label" style="margin-left:2px" >имени</label>
+                                <input type="radio" @if($selected == "1" || $selected=="0") checked @endif style="margin-left:-20px" name="sort" class="form-check-input" value="1">
+                                <label for="sort" class="form-check-label" style="margin-left:2px" >имени</label>
                             </div>
                             <div class="form-check">
-                                <input type="radio" style="margin-left:-20px" name="sel_tags[]" class="form-check-input" value="" id="">
-                                <label for="" class="form-check-label" style="margin-left:2px" >рейтингу</label>
+                                <input type="radio" @if($selected == "2") checked @endif style="margin-left:-20px" name="sort" class="form-check-input" value="2">
+                                <label for="sort" class="form-check-label" style="margin-left:2px" >предмету</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" @if($selected == "3") checked @endif style="margin-left:-20px" name="sort" class="form-check-input" value="3">
+                                <label for="sort" class="form-check-label" style="margin-left:2px" >рейтингу</label>
                             </div>
                             <br>
                             <div class="float-left">
@@ -64,12 +78,27 @@
                 </div>
             </div>
             <br>
-            @if(\Auth::User()->status == "moderator")
+            @if(\Auth::User()->status == "director" || \Auth::User()->status == "moderator")
                 <div style="margin-right: 30px">
-                    <a href="{{url('/main/add_teacher')}}"
-                        class = "btn btn-primary btn-lg btn-block">Добавить учителя</a>
+                    <a href="{{url('/main/feedback')}}"
+                       class = "btn btn-primary btn-lg btn-block">Просмотреть отзывы</a>
                 </div>
+                @if(\Auth::User()->status == "moderator")
+                    <div style="margin-right: 30px; margin-top: 20px">
+                        <a href="{{url('/main/add_teacher')}}"
+                            class = "btn btn-primary btn-lg btn-block">Добавить учителя</a>
+                    </div>
+                @endif
             @endif
+
         </div>
     </div>
+    <script type="text/javascript">
+        //document.getElementById("age").addEventListener("change", function(){
+            //if(age % 10 == 1 && age != 11){}
+            //else if(age % 10 > 1 && age % 10 < 5 && (age < 12 || age > 14)){}
+            //else {}
+
+            document.getElementsByClassName('stage').innerHTML += " лет";
+    </script>
 @endsection

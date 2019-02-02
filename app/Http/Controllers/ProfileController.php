@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Review;
+use App\Rating;
 
 class ProfileController extends Controller
 {
     public function ShowProfile($id) {
         $teacher = User::findorFail($id);
         $reviews = Review::all()->where('id_get', $id);
+        $rating = Rating::all()->where('teacher_id', $id);
+        if($rating != null && count($rating) != 0) $teacher->likes = intval(count($rating->where('rate', 1))/count($rating)*100);
+        else $teacher->likes = -1;
+        $teacher->save();
         return view('/teachers/teacher_view', ['teacher' => $teacher], ['reviews' => $reviews]);
     }
     public function AddReview($teacher_id, Request $request) {
@@ -35,6 +40,6 @@ class ProfileController extends Controller
         {
             $review->delete();
         }
-        return redirect('/profile'.$id);
+        return redirect()->back();
     }
 }
