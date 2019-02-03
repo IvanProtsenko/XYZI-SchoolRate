@@ -72,7 +72,7 @@
             @endif
             @foreach($reviews as $review)
                 @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator"
-                || (\Auth::User()->status == "director" || $review->status == "accepted"))
+                || (\Auth::User()->status == "director" && $review->status == "accepted"))
                     <div class="jumbotron" style="padding: 20px">
                         <h4 class="display-6">Дата создания комментария: <b>{{$review->created_at}}</b>
                             @if(\Auth::User()->status == "moderator" && $review->status == 'waiting')

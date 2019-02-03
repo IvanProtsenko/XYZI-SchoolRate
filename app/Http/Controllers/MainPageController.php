@@ -49,6 +49,9 @@ class MainPageController extends Controller
         {
             $teacher->delete();
         }
+        else {
+            return redirect('/main');
+        }
     }
     public function AddTeacherView(Request $request)
     {
@@ -61,8 +64,13 @@ class MainPageController extends Controller
     }
     public function EditTeacherView(Request $request)
     {
-        $teacher = User::findOrFail($request->id);
-        return view('/teachers/edit_teacher', ['teacher' => $teacher]);
+        if(\Auth::User()->status == "moderator") {
+            $teacher = User::findOrFail($request->id);
+            return view('/teachers/edit_teacher', ['teacher' => $teacher]);
+        }
+        else {
+            return redirect('main');
+        }
     }
     protected function validator(array $request)
     {

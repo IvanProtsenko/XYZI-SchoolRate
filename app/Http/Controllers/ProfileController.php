@@ -38,13 +38,4 @@ class ProfileController extends Controller
         $review->save();
         return redirect('/profile'.$teacher->id);
     }
-    public function DeleteReview($id, $id2)
-    {
-        $review = Review::findOrFail($id2);
-        if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator" || \Auth::User()->status == "director")
-        {
-            $review->delete();
-        }
-        return redirect()->back();
-    }
 }

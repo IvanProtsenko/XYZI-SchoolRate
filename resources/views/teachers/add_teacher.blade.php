@@ -17,7 +17,8 @@
 
         <div class = "form-group required">
             <label>Предмет учителя</label>
-            <select name="subject" multiple class="form-control" id="exampleFormControlSelect2">
+            <select name="subject" class="form-control" id="exampleFormControlSelect2">\
+                <option selected>Выберите из списка</option>
                 <option>Алгебра и геометрия</option>
                 <option>Английский язык</option>
                 <option>Астрономия</option>
@@ -28,6 +29,7 @@
                 <option>Русский язык и литература</option>
                 <option>Физика</option>
                 <option>Физультура</option>
+                <option>История и обществознание</option>
             </select>
         </div>
 
