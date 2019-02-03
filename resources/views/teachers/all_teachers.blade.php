@@ -10,9 +10,11 @@
                         <div class="float-left" style="margin-bottom: -33px; margin-right: 150px">
                             <h4>
                                 @if(\Auth::User()->status == "moderator")
-                                <a href={{"/main/delete_teacher".$teacher->id}}>
-                                    <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
-                            @endif
+                                    <a onclick="return DeleteTeacher();" href={{"/main/delete_teacher".$teacher->id}}>
+                                        <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
+                                    <a href={{"/main/edit_teacher".$teacher->id}}>
+                                        <img src="https://img.icons8.com/color/48/000000/edit-file.png" width="25px"></a>
+                                @endif
                             <a href="{{url('/profile'.$teacher->id)}}">
                                 <b>{{$teacher->name}}</b></a>
                                 @if(\Auth::User()->status == "student")
@@ -106,12 +108,13 @@
 
         </div>
     </div>
-    <script type="text/javascript">
-        //document.getElementById("age").addEventListener("change", function(){
-            //if(age % 10 == 1 && age != 11){}
-            //else if(age % 10 > 1 && age % 10 < 5 && (age < 12 || age > 14)){}
-            //else {}
-
-            document.getElementsByClassName('stage').innerHTML += " лет";
+    <script>
+        function DeleteTeacher () {
+            var deleted = confirm("Вы уверены, что хотите удалить учителя?");
+            if (!deleted) {
+                return false;
+            }
+            else return true;
+        }
     </script>
 @endsection

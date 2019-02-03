@@ -7,12 +7,12 @@
         {{ csrf_field() }}
         <div class = "form-group required">
             <label>ФИО учителя</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control" required value="{{$teacher->name}}">
         </div>
 
         <div class = "form-group required">
             <label>Email учителя</label>
-            <input type="email" name="email" class="form-control" required>
+            <input type="email" name="email" class="form-control" required value="{{$teacher->email}}">
         </div>
 
         <div class = "form-group required">
@@ -33,12 +33,12 @@
 
         <div class = "form-group">
             <label>Дата начала преподавательства</label>
-            <input type="date" name="age" class="form-control" >
+            <input type="date" name="age" class="form-control" value="{{$teacher->age}}">
         </div>
 
         <div class = "form-group">
             <label>Стаж работы</label>
-            <input name="stage" class="form-control" >
+            <input name="stage" class="form-control" value="{{$teacher->stage}}">
         </div>
 
         <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">

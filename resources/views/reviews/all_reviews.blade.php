@@ -20,10 +20,10 @@
                                         @if(\Auth::User()->status == "moderator" || \Auth::User()->status == "director")
                                             Отзыв:
                                             @if(\Auth::User()->status == "moderator")
-                                                <a href={{"/main/accept_rev/$review->id"}}>
+                                                <a onclick="return AcceptRev()" href={{"/main/accept_rev/$review->id"}}>
                                                     <img src="https://img.icons8.com/flat_round/64/000000/checkmark.png" width="22px"></a>
                                             @endif
-                                            <a href={{"/profile$teacher->id/delete_rev/$review->id"}}>
+                                            <a onclick="return DeleteRev()" href={{"/profile$teacher->id/delete_rev/$review->id"}}>
                                                 <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
                                         @endif
                                     </div>
@@ -52,12 +52,20 @@
             @endif
         </div>
     </div>
-    <script type="text/javascript">
-        //document.getElementById("age").addEventListener("change", function(){
-        //if(age % 10 == 1 && age != 11){}
-        //else if(age % 10 > 1 && age % 10 < 5 && (age < 12 || age > 14)){}
-        //else {}
-
-        document.getElementsByClassName('stage').innerHTML += " лет";
+    <script>
+        function DeleteRev() {
+            var deleted = confirm("Вы уверены, что хотите удалить отзыв?");
+            if (!deleted) {
+                return false;
+            }
+            else return true;
+        }
+        function AcceptRev() {
+            var deleted = confirm("Вы уверены, что хотите принять отзыв?");
+            if (!deleted) {
+                return false;
+            }
+            else return true;
+        }
     </script>
 @endsection

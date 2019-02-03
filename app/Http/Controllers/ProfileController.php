@@ -12,12 +12,17 @@ class ProfileController extends Controller
 {
     public function ShowProfile($id) {
         $teacher = User::findorFail($id);
-        $reviews = Review::all()->where('id_get', $id);
-        $rating = Rating::all()->where('teacher_id', $id);
-        if($rating != null && count($rating) != 0) $teacher->likes = intval(count($rating->where('rate', 1))/count($rating)*100);
-        else $teacher->likes = -1;
-        $teacher->save();
-        return view('/teachers/teacher_view', ['teacher' => $teacher], ['reviews' => $reviews]);
+        if($teacher->status == "teacher") {
+            $reviews = Review::all()->where('id_get', $id);
+            $rating = Rating::all()->where('teacher_id', $id);
+            if ($rating != null && count($rating) != 0) $teacher->likes = intval(count($rating->where('rate', 1)) / count($rating) * 100);
+            else $teacher->likes = -1;
+            $teacher->save();
+            return view('/teachers/teacher_view', ['teacher' => $teacher], ['reviews' => $reviews]);
+        }
+        else {
+            return redirect('/main');
+        }
     }
     public function AddReview($teacher_id, Request $request) {
         $teacher = User::findorFail($teacher_id);
@@ -36,7 +41,7 @@ class ProfileController extends Controller
     public function DeleteReview($id, $id2)
     {
         $review = Review::findOrFail($id2);
-        if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator")
+        if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator" || \Auth::User()->status == "director")
         {
             $review->delete();
         }
