@@ -10,9 +10,11 @@
                         <div class="float-left" style="margin-bottom: -33px; margin-right: 150px">
                             <h4>
                                 @if(\Auth::User()->status == "moderator")
-                                <a href={{"/main/delete_teacher".$teacher->id}}>
-                                    <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
-                            @endif
+                                    <a onclick="return DeleteTeacher();" href={{"/main/delete_teacher".$teacher->id}}>
+                                        <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
+                                    <a href={{"/main/edit_teacher".$teacher->id}}>
+                                        <img src="https://img.icons8.com/color/48/000000/edit-file.png" width="25px"></a>
+                                @endif
                             <a href="{{url('/profile'.$teacher->id)}}">
                                 <b>{{$teacher->name}}</b></a>
                                 @if(\Auth::User()->status == "student")
@@ -23,7 +25,16 @@
                                         <img src="https://img.icons8.com/ios-glyphs/30/000000/thumbs-down.png">
                                     </a>
                                 @endif
-                                    @if($teacher->likes > -1)<b>{{$teacher->likes}}%</b>
+                                    @if($teacher->likes > -1)
+                                        @if($teacher->likes > 75)
+                                            <b style="color: green">{{$teacher->likes}}%</b>
+                                        @elseif($teacher->likes > 50)
+                                            <b style="color: yellowgreen">{{$teacher->likes}}%</b>
+                                        @elseif($teacher->likes > 25)
+                                            <b style="color: orange">{{$teacher->likes}}%</b>
+                                        @elseif($teacher->likes <= 25)
+                                            <b style="color: red">{{$teacher->likes}}%</b>
+                                        @endif
                                     @else <b>Нет отзывов</b>
                                     @endif
                             </h4>
@@ -39,7 +50,11 @@
                                     Дата рождения: {{$teacher->age==null?'':$teacher->age->format('Y-m-d')}}
                                 </div>
                                 <div id = "stage" class="float-right stage">
-                                    Стаж работы: {{$teacher->stage}}
+                                    Стаж работы: {{$stage = idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage}}
+                                    @if($stage % 10 == 1 && $stage != 11) год
+                                    @elseif($stage % 10 > 1 && $stage % 10 < 5 && ($stage < 12 || $stage)) года
+                                    @else лет
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -93,12 +108,13 @@
 
         </div>
     </div>
-    <script type="text/javascript">
-        //document.getElementById("age").addEventListener("change", function(){
-            //if(age % 10 == 1 && age != 11){}
-            //else if(age % 10 > 1 && age % 10 < 5 && (age < 12 || age > 14)){}
-            //else {}
-
-            document.getElementsByClassName('stage').innerHTML += " лет";
+    <script>
+        function DeleteTeacher () {
+            var deleted = confirm("Вы уверены, что хотите удалить учителя?");
+            if (!deleted) {
+                return false;
+            }
+            else return true;
+        }
     </script>
 @endsection

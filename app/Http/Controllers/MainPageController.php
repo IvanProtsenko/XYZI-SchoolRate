@@ -49,11 +49,20 @@ class MainPageController extends Controller
         {
             $teacher->delete();
         }
-        return redirect('/main');
     }
     public function AddTeacherView(Request $request)
     {
-        return view('/teachers/add_teacher');
+        if(\Auth::User()->status == "moderator") {
+            return view('/teachers/add_teacher');
+        }
+        else {
+            return redirect('main');
+        }
+    }
+    public function EditTeacherView(Request $request)
+    {
+        $teacher = User::findOrFail($request->id);
+        return view('/teachers/edit_teacher', ['teacher' => $teacher]);
     }
     protected function validator(array $request)
     {
@@ -81,33 +90,30 @@ class MainPageController extends Controller
         $teacher->save();
         return redirect('/main');
     }
-    public function LikeFromMain($teacher_id)
+    public function EditTeacher(Request $request)
     {
-        if($rating = Rating::where('teacher_id', $teacher_id)->where('user_id', \Auth::User()->id)->first()) {
-            $rating->rate = true;
+        if(\Auth::User()->status == "moderator") {
+            $teacher = User::findOrFail($request->id);
+            $teacher->name = $request->name;
+            $teacher->email = $request->email;
+            $teacher->subject = $request->subject;
+            $teacher->status = "teacher";
+            $teacher->age = $request->age;
+            $teacher->stage = $request->stage;
+            $teacher->password = Hash::make($request->password);
+            $teacher->save();
+            $this->validator($request->all())->validate();
+            if ($request->hasFile('image')) {
+                $extn = '.' . $request->file('image')->guessClientExtension();
+                $path = $request->file('image')->storeAs('user_avatars', $teacher->id . $extn);
+                $teacher->image = $path;
+            }
+            $teacher->save();
+            return redirect('/main');
         }
         else {
-            $rating = new Rating;
-            $rating->teacher_id = $teacher_id;
-            $rating->user_id = \Auth::User()->id;
-            $rating->rate = true;
+            redirect()->back();
         }
-        $rating->save();
-        return redirect()->back();
-    }
-    public function DislikeFromMain($teacher_id)
-    {
-        if($rating = Rating::where('teacher_id', $teacher_id)->where('user_id', \Auth::User()->id)->first()) {
-            $rating->rate = false;
-        }
-        else {
-            $rating = new Rating;
-            $rating->teacher_id = $teacher_id;
-            $rating->user_id = \Auth::User()->id;
-            $rating->rate = false;
-        }
-        $rating->save();
-        return redirect()->back();
     }
     public function Like($teacher_id)
     {
