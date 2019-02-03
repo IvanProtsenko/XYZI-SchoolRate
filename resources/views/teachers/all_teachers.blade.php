@@ -48,13 +48,9 @@
                                     Дата рождения: {{$teacher->age==null?'':$teacher->age->format('Y-m-d')}}
                                 </div>
                                 <div id = "stage" class="float-right stage">
-                                    Стаж работы: {{idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage}}
-                                    @if(idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage % 10 == 1
-                                    && idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage != 11) год
-                                    @elseif(idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage %
-                                     10 > 1 && idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage
-                                      % 10 < 5 && (idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage
-                                       < 12 || idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage > 14)) года
+                                    Стаж работы: {{$stage = idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage}}
+                                    @if($stage % 10 == 1 && $stage != 11) год
+                                    @elseif($stage % 10 > 1 && $stage % 10 < 5 && ($stage < 12 || $stage)) года
                                     @else лет
                                     @endif
                                 </div>
