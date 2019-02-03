@@ -21,7 +21,7 @@
         </div>
 
         <div class = "form-group">
-            <label>Дата рождения</label>
+            <label>Дата начала преподавательства</label>
             <input type="date" name="age" class="form-control" >
         </div>
 

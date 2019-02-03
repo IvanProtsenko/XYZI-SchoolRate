@@ -23,7 +23,16 @@
                                         <img src="https://img.icons8.com/ios-glyphs/30/000000/thumbs-down.png">
                                     </a>
                                 @endif
-                                    @if($teacher->likes > -1)<b>{{$teacher->likes}}%</b>
+                                    @if($teacher->likes > -1)
+                                        @if($teacher->likes > 75)
+                                            <b style="color: green">{{$teacher->likes}}%</b>
+                                        @elseif($teacher->likes > 50)
+                                            <b style="color: yellowgreen">{{$teacher->likes}}%</b>
+                                        @elseif($teacher->likes > 25)
+                                            <b style="color: orange">{{$teacher->likes}}%</b>
+                                        @elseif($teacher->likes <= 25)
+                                            <b style="color: red">{{$teacher->likes}}%</b>
+                                        @endif
                                     @else <b>Нет отзывов</b>
                                     @endif
                             </h4>
@@ -39,7 +48,15 @@
                                     Дата рождения: {{$teacher->age==null?'':$teacher->age->format('Y-m-d')}}
                                 </div>
                                 <div id = "stage" class="float-right stage">
-                                    Стаж работы: {{$teacher->stage}}
+                                    Стаж работы: {{idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage}}
+                                    @if(idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage % 10 == 1
+                                    && idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage != 11) год
+                                    @elseif(idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage %
+                                     10 > 1 && idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage
+                                      % 10 < 5 && (idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage
+                                       < 12 || idate('Y', \Carbon\Carbon::now()->format('Y'))-1970+$teacher->stage > 14)) года
+                                    @else лет
+                                    @endif
                                 </div>
                             </div>
                         </div>
