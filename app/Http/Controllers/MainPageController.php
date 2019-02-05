@@ -16,6 +16,7 @@ use App\Rating;
 class MainPageController extends Controller
 {
     public function ShowList(Request $request) {
+        if(\Auth::User()->condition == "active") {
         $selected = 0;
         if(isset($request->sort)) {
             $selected = $request->sort;
@@ -39,8 +40,11 @@ class MainPageController extends Controller
             else $teacher->likes = -1;
             $teacher->save();
         }
-
         return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => $selected]);
+        }
+        else {
+            return view('/layouts/waiting_page');
+        }
     }
     public function DeleteTeacher($id)
     {
@@ -150,5 +154,14 @@ class MainPageController extends Controller
         }
         $rating->save();
         return redirect()->back();
+    }
+    public function ShowRequests() {
+        if(\Auth::User()->status == "moderator") {
+            $users = User::all()->where('condition', 'waiting');
+            return view('/layouts/requests', ['users' => $users]);
+        }
+        else {
+            return redirect('/main');
+        }
     }
 }
