@@ -50,5 +50,6 @@ Route::get('/main/requests', 'MainPageController@ShowRequests');
 Route::get('/main/accept_rev/{id}', 'FeedbackController@Accept');
 Route::get('/main/accept_user/{id}', 'ProfileController@Accept');
 Route::get('/main/delete_user/{id}', 'ProfileController@Delete');
+Route::get('/main/ban/{id}', 'ProfileController@Ban');
 
 

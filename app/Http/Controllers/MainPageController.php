@@ -42,6 +42,9 @@ class MainPageController extends Controller
         }
         return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => $selected]);
         }
+        elseif(\Auth::User()->condition == "banned") {
+            return view('/layouts/ban_page');
+        }
         else {
             return view('/layouts/waiting_page');
         }

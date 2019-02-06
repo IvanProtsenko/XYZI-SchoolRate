@@ -59,4 +59,13 @@ class ProfileController extends Controller
         }
         else return redirect('/main');
     }
+    public function Ban($id) {
+        if(\Auth::User()->status == "moderator") {
+            $user = User::findOrFail($id);
+            $user->condition = "banned";
+            $user->save();
+            return redirect()->back();
+        }
+        else return redirect('/main');
+    }
 }
