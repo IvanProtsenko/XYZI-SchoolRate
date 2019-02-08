@@ -29,7 +29,7 @@
                     <b>На главную</b>
                 </a>
                 @endif
-                <a style="margin-left: 150px" class="navbar-brand" href="{{ url('/main') }}">
+                <a style="margin-left: 150px" class="navbar-brand" href="{{ url('/') }}">
                     <b>SchoolRate</b>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -86,5 +86,12 @@
             @yield('content')
         </main>
     </div>
+<style>
+    body {
+        background-image: url("https://image.freepik.com/free-photo/no-translate-detected_23-2147734216.jpg");
+        background-size: 100%;
+    }
+
+</style>
 </body>
 </html>

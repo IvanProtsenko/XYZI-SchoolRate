@@ -4,7 +4,7 @@
     <div class="card-group">
         <div class="col-md-4">
             <div class="card" style="margin-left: 30px; margin-right: 50px; width: 400px;">
-                <img class="card-img-top"
+                <img class="card-img"
                      src="{{url('/media/'.$teacher->image)}}"/>
             </div>
         </div>
@@ -66,9 +66,9 @@
             </div>
             @endif
             @if(\Auth::User()->status == "moderator" || \Auth::User()->status == "director")
-                <h1 style="margin-top: 20px; margin-bottom: 20px"><b>Комментарии к учителю:</b></h1>
+                <h1 style="margin-top: 20px; margin-bottom: 20px; color: #bac6af"><b>Комментарии к учителю:</b></h1>
             @elseif(\Auth::User()->status == "student")
-                <h1 style="margin-top: 20px; margin-bottom: 20px"><b>Ваши комментарии к учителю:</b></h1>
+                <h1 style="margin-top: 20px; margin-bottom: 20px; color: #bac6af"><b>Ваши комментарии к учителю:</b></h1>
             @endif
             @foreach($reviews as $review)
                 @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator"
