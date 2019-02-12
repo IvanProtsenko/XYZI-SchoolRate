@@ -12,8 +12,6 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-image: url("https://image.freepik.com/free-photo/no-translate-detected_23-2147734216.jpg");
-                background-size: 100%;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -47,11 +45,11 @@
 
             .title {
                 font-size: 84px;
-                color: #ff7f4c;
+                color: #4c5563;
             }
 
             .links > a {
-                color: #ff7f4c;
+                color: #4c5563;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -70,12 +68,12 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/main') }}">На главную</a>
+                        <a style="color: #595e66" href="{{ url('/main') }}">На главную</a>
                     @else
-                        <a style="color: #bed6cf" href="{{ route('login') }}">Войти</a>
+                        <a style="color: #595e66" href="{{ route('login') }}">Войти</a>
 
                         @if (Route::has('register'))
-                            <a style="color: #bed6cf" href="{{ route('register') }}">Регистрация</a>
+                            <a style="color: #595e66" href="{{ route('register') }}">Регистрация</a>
                         @endif
                     @endauth
                 </div>
@@ -87,8 +85,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="http://127.0.0.1:8000/aboutUs">О нас</a>
-                    <a href="http://127.0.0.1:8000/aboutProject">О проекте</a>
+                    <a href="http://127.0.0.1:8000/aboutUs">О нас и проекте</a>
                     <a href="https://laravel-news.com">Правила и рекомендации</a>
                 </div>
             </div>

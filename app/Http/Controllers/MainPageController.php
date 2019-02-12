@@ -170,7 +170,4 @@ class MainPageController extends Controller
     public function AboutUs() {
         return view('/layouts/about_us');
     }
-    public function AboutProject() {
-        return view('/layouts/about_project');
-    }
 }

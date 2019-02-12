@@ -16,7 +16,6 @@ Route::get('/', function () {
 });
 
 Route::get('/aboutUs', 'MainPageController@AboutUs');
-Route::get('/aboutProject', 'MainPageController@AboutProject');
 
 Route::get('/main', 'MainPageController@ShowList');
 //Route::post('/main', 'MainPageController@ShowList');

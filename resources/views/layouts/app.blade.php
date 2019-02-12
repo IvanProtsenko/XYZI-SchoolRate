@@ -86,12 +86,5 @@
             @yield('content')
         </main>
     </div>
-<style>
-    body {
-        background-image: url("https://image.freepik.com/free-photo/no-translate-detected_23-2147734216.jpg");
-        background-size: 100%;
-    }
-
-</style>
 </body>
 </html>
