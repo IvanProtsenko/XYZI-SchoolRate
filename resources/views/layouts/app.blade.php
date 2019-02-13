@@ -29,7 +29,7 @@
                     <b>На главную</b>
                 </a>
                 @endif
-                <a style="margin-left: 150px" class="navbar-brand" href="{{ url('/main') }}">
+                <a style="margin-left: 150px" class="navbar-brand" href="{{ url('/') }}">
                     <b>SchoolRate</b>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

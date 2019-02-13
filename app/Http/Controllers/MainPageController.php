@@ -16,6 +16,7 @@ use App\Rating;
 class MainPageController extends Controller
 {
     public function ShowList(Request $request) {
+        if(\Auth::User()->condition == "active") {
         $selected = 0;
         if(isset($request->sort)) {
             $selected = $request->sort;
@@ -39,8 +40,14 @@ class MainPageController extends Controller
             else $teacher->likes = -1;
             $teacher->save();
         }
-
         return view('/teachers/all_teachers', ['teachers' => $teachers], ['selected' => $selected]);
+        }
+        elseif(\Auth::User()->condition == "banned") {
+            return view('/layouts/ban_page');
+        }
+        else {
+            return view('/layouts/waiting_page');
+        }
     }
     public function DeleteTeacher($id)
     {
@@ -48,6 +55,9 @@ class MainPageController extends Controller
         if(\Auth::User()->status == "moderator")
         {
             $teacher->delete();
+        }
+        else {
+            return redirect('/main');
         }
     }
     public function AddTeacherView(Request $request)
@@ -61,8 +71,13 @@ class MainPageController extends Controller
     }
     public function EditTeacherView(Request $request)
     {
-        $teacher = User::findOrFail($request->id);
-        return view('/teachers/edit_teacher', ['teacher' => $teacher]);
+        if(\Auth::User()->status == "moderator") {
+            $teacher = User::findOrFail($request->id);
+            return view('/teachers/edit_teacher', ['teacher' => $teacher]);
+        }
+        else {
+            return redirect('main');
+        }
     }
     protected function validator(array $request)
     {
@@ -142,5 +157,17 @@ class MainPageController extends Controller
         }
         $rating->save();
         return redirect()->back();
+    }
+    public function ShowRequests() {
+        if(\Auth::User()->status == "moderator") {
+            $users = User::all()->where('condition', 'waiting');
+            return view('/layouts/requests', ['users' => $users]);
+        }
+        else {
+            return redirect('/main');
+        }
+    }
+    public function AboutUs() {
+        return view('/layouts/about_us');
     }
 }

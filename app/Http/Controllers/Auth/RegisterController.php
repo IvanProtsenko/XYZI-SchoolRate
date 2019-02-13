@@ -77,9 +77,14 @@ class RegisterController extends Controller
         $user->age = Carbon::createFromFormat('Y-m-d', $data['age']);
         if($data['invite'] == "ABCD") {
             $user->status = 'moderator';
+            $user->condition = "active";
         }
         elseif($data['invite'] == "DIR") {
             $user->status = 'director';
+            $user->condition = "active";
+        }
+        else {
+            $user->condition = "waiting";
         }
         $user->save();
         return $user;

@@ -17,14 +17,31 @@ use App\Rating;
 class FeedbackController extends Controller
 {
     public function ShowFeedback() {
-        $reviews = Review::all()->sortByDesc('updated_at');
-        $teachers = User::all()->where('status', 'teacher');
-        return view('/reviews/all_reviews', ['reviews' => $reviews], ['teachers' => $teachers]);
+        if(\Auth::User()->status == "moderator" || \Auth::User()->status == "director") {
+            $reviews = Review::all()->sortByDesc('updated_at');
+            $teachers = User::all()->where('status', 'teacher');
+            return view('/reviews/all_reviews', ['reviews' => $reviews], ['teachers' => $teachers]);
+        }
+        else {
+            return redirect('/main');
+        }
     }
     public function Accept($id) {
-        $review = Review::findOrFail($id);
-        $review->status = "accepted";
-        $review->save();
+        if(\Auth::User()->status == "moderator") {
+            $review = Review::findOrFail($id);
+            $review->status = "accepted";
+            $review->save();
+            return redirect()->back();
+        }
+        else return redirect('/main');
+    }
+    public function DeleteReview($id, $id2)
+    {
+        $review = Review::findOrFail($id2);
+        if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator" || \Auth::User()->status == "director")
+        {
+            $review->delete();
+        }
         return redirect()->back();
     }
 }

@@ -100,6 +100,10 @@
                 </div>
                 @if(\Auth::User()->status == "moderator")
                     <div style="margin-right: 30px; margin-top: 20px">
+                        <a href="{{url('/main/requests')}}"
+                           class = "btn btn-primary btn-lg btn-block">Просмотреть запросы регистрации</a>
+                    </div>
+                    <div style="margin-right: 30px; margin-top: 20px">
                         <a href="{{url('/main/add_teacher')}}"
                             class = "btn btn-primary btn-lg btn-block">Добавить учителя</a>
                     </div>

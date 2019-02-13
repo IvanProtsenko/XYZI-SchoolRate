@@ -11,14 +11,18 @@ use App\Rating;
 class ProfileController extends Controller
 {
     public function ShowProfile($id) {
-        $teacher = User::findorFail($id);
-        if($teacher->status == "teacher") {
-            $reviews = Review::all()->where('id_get', $id);
-            $rating = Rating::all()->where('teacher_id', $id);
-            if ($rating != null && count($rating) != 0) $teacher->likes = intval(count($rating->where('rate', 1)) / count($rating) * 100);
-            else $teacher->likes = -1;
-            $teacher->save();
-            return view('/teachers/teacher_view', ['teacher' => $teacher], ['reviews' => $reviews]);
+        if(\Auth::User()->condition == "active") {
+            $teacher = User::findorFail($id);
+            if ($teacher->status == "teacher") {
+                $reviews = Review::all()->where('id_get', $id);
+                $rating = Rating::all()->where('teacher_id', $id);
+                if ($rating != null && count($rating) != 0) $teacher->likes = intval(count($rating->where('rate', 1)) / count($rating) * 100);
+                else $teacher->likes = -1;
+                $teacher->save();
+                return view('/teachers/teacher_view', ['teacher' => $teacher], ['reviews' => $reviews]);
+            } else {
+                return redirect('/main');
+            }
         }
         else {
             return redirect('/main');
@@ -38,13 +42,30 @@ class ProfileController extends Controller
         $review->save();
         return redirect('/profile'.$teacher->id);
     }
-    public function DeleteReview($id, $id2)
-    {
-        $review = Review::findOrFail($id2);
-        if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator" || \Auth::User()->status == "director")
-        {
-            $review->delete();
+    public function Accept($id) {
+        if(\Auth::User()->status == "moderator") {
+            $user = User::findOrFail($id);
+            $user->condition = "active";
+            $user->save();
+            return redirect()->back();
         }
-        return redirect()->back();
+        else return redirect('/main');
+    }
+    public function Delete($id) {
+        if(\Auth::User()->status == "moderator") {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect()->back();
+        }
+        else return redirect('/main');
+    }
+    public function Ban($id) {
+        if(\Auth::User()->status == "moderator") {
+            $user = User::findOrFail($id);
+            $user->condition = "banned";
+            $user->save();
+            return redirect()->back();
+        }
+        else return redirect('/main');
     }
 }

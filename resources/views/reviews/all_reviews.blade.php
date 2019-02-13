@@ -25,6 +25,10 @@
                                             @endif
                                             <a onclick="return DeleteRev()" href={{"/profile$teacher->id/delete_rev/$review->id"}}>
                                                 <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
+                                            @if(\Auth::User()->status == "moderator")
+                                                <a onclick="return BanStudent()" href={{"/main/ban/$review->id_send"}}>
+                                                    Забанить ученика</a>
+                                            @endif
                                         @endif
                                     </div>
                                 @endif
@@ -62,6 +66,13 @@
         }
         function AcceptRev() {
             var deleted = confirm("Вы уверены, что хотите принять отзыв?");
+            if (!deleted) {
+                return false;
+            }
+            else return true;
+        }
+        function BanStudent() {
+            var deleted = confirm("Вы уверены, что хотите забанить этого ученика?");
             if (!deleted) {
                 return false;
             }

@@ -76,7 +76,18 @@
                             <input id="invite" type="password" class="form-control" name="invite" value="{{old('invite')}}">
                         </div>
 
-                        <div class="form-group" style="margin-top: 10px">
+                        <div class="rounded border border-dark" style="padding: 10px; background-color: #ffe35b; margin-top: 10px">
+                            На нашем веб-сервисе мы не приветствуем использование ненормативной лексики(в любой ее
+                            форме) и оскорблений. Огромная просьба не прибегать к подобным способам выражения сво
+                            его мнения. Любая информация, воспринятая администрацией сайта как оскорбление или нен
+                            ормативная лексика, будет оперативно удаляться, к нарушителю будут применены соответст
+                            вующие санкции (блокировка доступа к сервису). Будьте конструктивны в выражении своего мнения.
+                        </div>
+
+                        <input type="checkbox" name="multi_note" value="1" style="margin-top: 10px" required>
+                        <b> Я прочитал правила сайта и согласен с ними</b>
+
+                        <div class="form-group" style="margin-top: 20px">
                             <button type="submit" class="btn btn-primary">
                                 Зарегистрироваться
                             </button>

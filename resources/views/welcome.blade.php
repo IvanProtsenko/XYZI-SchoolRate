@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>SchoolRate</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -12,7 +12,6 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -46,10 +45,11 @@
 
             .title {
                 font-size: 84px;
+                color: #4c5563;
             }
 
             .links > a {
-                color: #636b6f;
+                color: #4c5563;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -68,12 +68,12 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a style="color: #595e66" href="{{ url('/main') }}">На главную</a>
                     @else
-                        <a href="{{ route('login') }}">Войти</a>
+                        <a style="color: #595e66" href="{{ route('login') }}">Войти</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Регистрация</a>
+                            <a style="color: #595e66" href="{{ route('register') }}">Регистрация</a>
                         @endif
                     @endauth
                 </div>
@@ -81,16 +81,12 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    SchoolRate
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="http://127.0.0.1:8000/aboutUs">О нас и проекте</a>
+                    <a href="https://laravel-news.com">Правила и рекомендации</a>
                 </div>
             </div>
         </div>

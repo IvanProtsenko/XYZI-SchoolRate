@@ -4,7 +4,7 @@
     <div class="card-group">
         <div class="col-md-4">
             <div class="card" style="margin-left: 30px; margin-right: 50px; width: 400px;">
-                <img class="card-img-top"
+                <img class="card-img"
                      src="{{url('/media/'.$teacher->image)}}"/>
             </div>
         </div>
@@ -66,23 +66,28 @@
             </div>
             @endif
             @if(\Auth::User()->status == "moderator" || \Auth::User()->status == "director")
-                <h1 style="margin-top: 20px; margin-bottom: 20px"><b>Комментарии к учителю:</b></h1>
+                <h1 style="margin-top: 20px; margin-bottom: 20px; color: #bac6af"><b>Комментарии к учителю:</b></h1>
             @elseif(\Auth::User()->status == "student")
-                <h1 style="margin-top: 20px; margin-bottom: 20px"><b>Ваши комментарии к учителю:</b></h1>
+                <h1 style="margin-top: 20px; margin-bottom: 20px; color: #bac6af"><b>Ваши комментарии к учителю:</b></h1>
             @endif
             @foreach($reviews as $review)
                 @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator"
-                || (\Auth::User()->status == "director" || $review->status == "accepted"))
+                || (\Auth::User()->status == "director" && $review->status == "accepted"))
                     <div class="jumbotron" style="padding: 20px">
                         <h4 class="display-6">Дата создания комментария: <b>{{$review->created_at}}</b>
                             @if(\Auth::User()->status == "moderator" && $review->status == 'waiting')
                                 <a onclick="return AcceptRev()" href={{"/main/accept_rev/$review->id"}}>
                                     <img src="https://img.icons8.com/flat_round/64/000000/checkmark.png" width="22px"></a>
+
                             @endif
                             @if($review->id_send == \Auth::User()->id || \Auth::User()->status == "moderator"
                             || (\Auth::User()->status == "director" || $review->status == "accepted"))
                                 <a onclick="return DeleteRev()" href={{"/profile$teacher->id/delete_rev/$review->id"}}>
                                     <img src="https://img.icons8.com/color/48/000000/cancel.png" width="25px"></a>
+                                @if(\Auth::User()->status == "moderator")
+                                    <a onclick="return BanStudent()" href={{"/main/ban/$review->id_send"}}>
+                                        Забанить ученика</a>
+                                @endif
                                 @if(\Auth::User()->status == "student" && $review->status == 'waiting')
                                     <div style="color: dodgerblue"> (Ваш отзыв на рассмотрении)</div>
                                 @elseif(\Auth::User()->status == "student" && $review->status == 'accepted')
@@ -114,6 +119,13 @@
         }
         function AcceptRev() {
             var deleted = confirm("Вы уверены, что хотите принять отзыв?");
+            if (!deleted) {
+                return false;
+            }
+            else return true;
+        }
+        function BanStudent() {
+            var deleted = confirm("Вы уверены, что хотите забанить этого ученика?");
             if (!deleted) {
                 return false;
             }
