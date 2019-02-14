@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="server.php/aboutUs">О нас и проекте</a>
+                    <a href="/aboutUs">О нас и проекте</a>
                     <a href="https://laravel-news.com">Правила и рекомендации</a>
                 </div>
             </div>
